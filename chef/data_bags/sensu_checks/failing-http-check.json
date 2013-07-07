@@ -1,0 +1,8 @@
+{
+  "id": "sensu-http-check",
+  "command": "/etc/sensu/plugins/check-http.rb -u 'http://localhost:6060/' -t 3",
+  "subscribers": [
+    "all"
+  ],
+  "interval": 30
+}

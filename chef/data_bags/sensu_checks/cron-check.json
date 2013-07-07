@@ -1,0 +1,9 @@
+{
+  "id": "cron-check",
+  "handlers": ["default"],
+  "command": "/etc/sensu/plugins/check-procs.rb -p cron -C 1",
+  "subscribers": [
+    "all"
+  ],
+  "interval": 30
+}
