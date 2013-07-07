@@ -20,15 +20,14 @@ sensu_handler "metrics" do
   handlers node["monitor"]["metric_handlers"]
 end
 
-check_definitions = case
-when Chef::Config[:solo]
-  data_bag("sensu_checks").map do |item|
+check_definitions = Array.new
+
+if Chef::Config[:solo]
+  check_definitions = data_bag("sensu_checks").map do |item|
     data_bag_item("sensu_checks", item)
   end
-when Chef::DataBag.list.has_key?("sensu_checks")
-  search(:sensu_checks, "*:*")
-else
-  Array.new
+else Chef::DataBag.list.has_key?("sensu_checks")
+  check_definitions = search(:sensu_checks, "*:*")
 end
 
 check_definitions.each do |check|

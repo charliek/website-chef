@@ -43,15 +43,8 @@ GIT
       windows (>= 1.8.8)
       yum (>= 0.0.0)
 
-PATH
-  remote: ../monitor/
-  specs:
-    monitor (0.0.1)
-      sensu (>= 0.0.0)
-
 DEPENDENCIES
   apt (= 2.0.0)
-  monitor (>= 0)
   rabbitmq (= 2.1.2)
   redis (>= 0)
   sensu (>= 0)

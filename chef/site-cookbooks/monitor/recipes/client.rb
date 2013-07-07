@@ -4,8 +4,8 @@ include_recipe "sensu::default"
 client_attributes = node["monitor"]["additional_client_attributes"].to_hash
 
 sensu_client node.name do
-  address node.ipaddress
-  subscriptions node.roles + ["all"]
+  address node["ipaddress"]
+  subscriptions node["roles"] + ["all"]
   additional client_attributes
 end
 

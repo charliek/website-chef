@@ -39,18 +39,13 @@ if [ ! -x ${CHEFSOLO} ]; then
   # Setup librarian which is used to download cookbooks
   gem install --no-rdoc --no-ri librarian-chef
 
-  # Pull down cookbooks
-  pushd /opt/chef-solo/website/chef/
-  librarian-chef install
-  popd
-
   # Setup Chef Solo
   mkdir -p $CHEFDIR/cache
 
 cat > $CHEFDIR/solo.rb << EOF
 root = '$CHEFDIR/website/chef'
 file_cache_path '$CHEFDIR/cache' 
-cookbook_path root + '/cookbooks'
+cookbook_path [ root + '/cookbooks', root + '/site-cookbooks']
 role_path root + '/roles'
 data_bag_path root + '/data_bags'
 EOF
@@ -58,6 +53,11 @@ EOF
   chown root:root $CHEFDIR/solo.rb
   chmod 644 $CHEFDIR/solo.rb
 fi;
+
+# Pull down cookbooks
+pushd /opt/chef-solo/website/chef/
+sudo librarian-chef install
+popd
 
 # Execute chef
 if [ -x ${CHEFSOLO} ]; then

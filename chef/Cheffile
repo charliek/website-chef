@@ -10,7 +10,4 @@ cookbook "redis",
 
 cookbook "sensu",
   :git => "https://github.com/sensu/sensu-chef.git"  
-
-cookbook "monitor",
-  :path => "../monitor/"
-
+  
